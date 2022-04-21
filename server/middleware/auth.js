@@ -13,6 +13,7 @@ class MiddleWare{
         catch(err){
             console.log(err);
             res.send('unknown error');
+            
             return;
         }
     }
