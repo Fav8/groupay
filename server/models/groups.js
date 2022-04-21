@@ -2,14 +2,25 @@ const {Groups} = require('./index')
 
 async function getExpenses(id){
   const gotGroup = await Groups.find({_id : id});
-  return gotGroup.expenses;
+  return gotGroup[0].expenses;
+}
+
+async function getGroup(password){
+  const gotGroup = await Groups.find({password :password});
+  return gotGroup[0];
+}
+
+async function addUser(id, user){
+  return await Groups.updateOne(
+    { _id: id }, 
+    { $push: { users: user } }
+);
 }
 
 async function createExpense(id, expense){
   return await Groups.updateOne(
     { _id: id }, 
-    { $push: { expenses: expense } },
-    done
+    { $push: { expenses: expense } }
 );
 }
 
@@ -33,4 +44,4 @@ async function deleteExpense(id, expense){
 
 
 
-module.exports = {getExpenses, createExpense, deleteExpense, createGroup}
+module.exports = {addUser, getExpenses, createExpense, deleteExpense, createGroup, getGroup}

@@ -1,19 +1,36 @@
 const {Users} = require('./index')
 
 
-async function createUser(user){
-  return await Users.create(user)
+async function createUser(uid){
+  try{
+    const newUser = new Users({uid: uid, groups: []});
+    console.log(newUser);
+    await newUser.save();
+    return newUser
+  }
+  catch(err){
+    console.log(err);
+  }
 }
 
-async function getGroups(id){
-    const user = await Users.find({_id: id})
-    return user.groups;
+async function getGroups(uid){
+    const user = await Users.find({uid: uid})
+    console.log(user[0].groups);
+    return user[0].groups;
   }
 
-async function findUser(email){
-  return await Users.findOne({email: email})
+  async function addGroup(uid, group){
+    return await Users.updateOne(
+      { uid: uid }, 
+      { $push: { groups: group}
+    }
+  );
+  }
+
+async function findUser(uid){
+  return await Users.findOne({uid: uid})
 }
 
 
 
-module.exports = {createUser, getGroups, findUser}
+module.exports = {createUser, getGroups, findUser, addGroup}

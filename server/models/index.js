@@ -2,16 +2,13 @@ const mongoose = require('mongoose')
 const GroupSchema = new mongoose.Schema({
   groupName: String,
   users: [String],
+  password: String, //this is cool btw
   expenses: [{
     title: {
       type: String,
       required: true
     },
-    group: {
-      type: String,
-      required: true
-    },
-    pictureUrl: {
+    /* pictureUrl: {
       type: String,
       required: true
     },
@@ -26,7 +23,7 @@ const GroupSchema = new mongoose.Schema({
     tag: {
       type: String,
       required: true
-    },
+    }, */ //touncomment in production
   }]
 
 }, {timestamps: false})
@@ -36,10 +33,11 @@ const UsersSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    groups: {
-      type: [String],
-      required: true
-    },
+    groups: [{ 
+      groupName: String,
+      _id: String,
+      password: String
+    }],
   },{timestamps: false});
   
 

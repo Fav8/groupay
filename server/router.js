@@ -9,6 +9,7 @@ router.post('/groups', groupscontroller.createGroup)
 router.delete('/expenses', groupscontroller.deleteExpense)
 router.get('/groups', userscontroller.getGroups)
 router.post('/register', userscontroller.createUser)
+router.put('/join', userscontroller.joinGroup)
 
 
 module.exports = router
