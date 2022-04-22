@@ -30,6 +30,7 @@ export default function Signup() {
             console.log(err)
         }
         setLoading(false)
+        
     }
   return (
     <Container className='d-flex align-items-center justify-content-center' style={{minHeight: '100vh'}}>

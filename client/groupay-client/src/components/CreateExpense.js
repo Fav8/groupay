@@ -6,25 +6,26 @@ import { useAuth } from "../context/AuthContext";
 
 export default function CreateExpense({ group, setExpenses }) {
   const [curr, setCurr] = useState('Currency')
+  const [activeUser, setActiveUser] = useState({})
   const titleRef = useRef();
   const valueRef = useRef();
   const currRef = useRef();
   const tagRef = useRef();
-  let activeUser = {}
   ///const imgRef = useRef(); NOT MVP
   const { currentUser, token } = useAuth();
 
 
   useEffect(() => {
     if(currentUser){
+      console.log('currentUser exists');
     apiServices
         .getUser(token, currentUser.uid)
-        .then((user) => activeUser = user);}
+        .then((user) => {setActiveUser(user)});}
   }, [currentUser])
   
   async function createExpense(e) {
     e.preventDefault();
-    console.log(activeUser.name, 'activeUser');
+    console.log(activeUser, 'activeUser');
     if (titleRef.current.value.length > 1 && valueRef.current.value > 0) {
       try {
         const newExpense = {
