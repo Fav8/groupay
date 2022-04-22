@@ -22,13 +22,21 @@ const apiServices = {
   getGroups: async function (authId, userId,) { 
     const headers = { headers: { Authorization: "Bearer " + authId, uid: userId } };
     const groups = await axios.get(url + "groups", headers);
-    console.log(groups.data);
     return groups.data;
+  },
+  getGroup: async function (authId, userId, password) { 
+    const headers = { headers: { Authorization: "Bearer " + authId, uid: userId, password: password } };
+    const group = await axios.get(url + "group", headers);
+    return group.data;
+  },
+  getUser: async function (authId, userId) { 
+    const headers = { headers: { Authorization: "Bearer " + authId, uid: userId } };
+    const user = await axios.get(url + "user", headers);
+    return user.data;
   },
   getExpenses: async function (authId, userId, groupId) { 
     const headers = { headers: { Authorization: "Bearer " + authId, uid: userId, groupId: groupId } };
     const groups = await axios.get(url + "expenses", headers);
-    console.log(groups);
     return groups.data;
   },
   joinGroup: async function (authId, userId, password) { //TOBECHANGED with a full expense

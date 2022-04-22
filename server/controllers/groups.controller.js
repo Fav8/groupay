@@ -75,5 +75,15 @@ async function createGroup(req, res) {
     res.send("501");
   }
 }
+async function getGroup(req, res) {
+  try {
+    const group = await groups.getGroup(req.headers.password);
+      res.send(group);
+    }
+    catch (err) {
+    console.log(err);
+    res.send("501");
+  }
+}
 
-module.exports = { createExpense, getExpenses, deleteExpense, createGroup };
+module.exports = { createExpense, getExpenses, deleteExpense, createGroup, getGroup };

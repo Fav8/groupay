@@ -8,8 +8,11 @@ router.post('/groups', groupscontroller.createGroup)
 //router.put('/:group/expenses', expensescontroller.updateExpense)
 router.delete('/expenses', groupscontroller.deleteExpense)
 router.get('/groups', userscontroller.getGroups)
+router.get('/group', groupscontroller.getGroup)
+router.get('/user', userscontroller.getUser)
 router.post('/register', userscontroller.createUser)
 router.put('/join', userscontroller.joinGroup)
+
 
 
 module.exports = router

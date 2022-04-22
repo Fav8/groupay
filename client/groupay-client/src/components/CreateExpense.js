@@ -1,16 +1,27 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Form, Button, Card, Dropdown } from "react-bootstrap";
 import apiServices from "../services/apiService";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function CreateExpense({ group, setExpenses }) {
+  const [curr, setCurr] = useState('Currency')
   const titleRef = useRef();
   const valueRef = useRef();
   const currRef = useRef();
   const tagRef = useRef();
+  let activeUser = {}
   ///const imgRef = useRef(); NOT MVP
   const { currentUser, token } = useAuth();
+
+
+  useEffect(() => {
+    if(currentUser){
+    apiServices
+        .getUser(token, currentUser.uid)
+        .then((user) => {activeUser = user; console.log(activeUser, 'active user');});}
+  }, [currentUser])
+  
   async function createExpense(e) {
     e.preventDefault();
     if (titleRef.current.value.length > 1 && valueRef.current.value > 0) {
@@ -22,6 +33,7 @@ export default function CreateExpense({ group, setExpenses }) {
           curr: 'EUR', //currRef.current.value ||
           tag: 'bill', //tagRef.current.value ||
           payer: currentUser.uid,
+          payerName: activeUser.name
         }
         const ack = await apiServices.createNewExpense(
           token,
@@ -57,16 +69,17 @@ export default function CreateExpense({ group, setExpenses }) {
                 placeholder="Enter amount"
                 ref={valueRef}
                 required
+                step="0.01"
               />
             </Form.Group>
             <Dropdown className="mb-3">
               <Dropdown.Toggle variant="success" id="dropdown-basic">
-                 {currRef.current && currRef.current.value } Currency
+                {curr}
               </Dropdown.Toggle>
-              <Dropdown.Menu ref={currRef}>
-                <Dropdown.Item>EUR</Dropdown.Item>
-                <Dropdown.Item>GBP</Dropdown.Item>
-                <Dropdown.Item>USD</Dropdown.Item>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={()=>setCurr('EUR')} >EUR</Dropdown.Item>
+                <Dropdown.Item onClick={()=>setCurr('GBP')}>GBP</Dropdown.Item>
+                <Dropdown.Item onClick={()=>setCurr('USD')}>USD</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
             <Dropdown className="mb-3">

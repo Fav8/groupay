@@ -44,4 +44,14 @@ async function joinGroup(req, res) {
   }
 }
 
-module.exports = { createUser, getGroups, joinGroup };
+async function getUser(req, res) {
+  try {
+    const user = await users.findUser(req.headers.uid);
+    res.send(user);
+  } catch (err) {
+    console.log(err);
+    res.send("400");
+  }
+}
+
+module.exports = { createUser, getGroups, joinGroup, getUser };
