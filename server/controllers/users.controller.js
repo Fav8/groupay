@@ -37,7 +37,7 @@ async function joinGroup(req, res) {
           groupName: group.groupName,
           password: group.password,
         });
-        res.send("added to group");
+        res.send(group);
         return;
       }
     } else {
