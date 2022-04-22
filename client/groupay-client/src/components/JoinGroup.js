@@ -23,7 +23,7 @@ export default function CreateGroup() {
         );
         console.log(joined);
       setValue('');
-      navigate(`/group/${joined.data.groupName}`)
+      navigate(`/group/${joined.data.groupName}`, { state: { group: joined.data } })
     } catch (error) {
       console.log(error);
     }}

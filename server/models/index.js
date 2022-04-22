@@ -8,10 +8,7 @@ const GroupSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    /* pictureUrl: {
-      type: String,
-      required: true
-    },
+     pictureUrl: String,
     value: {
       type: Number,
       required: true
@@ -23,12 +20,24 @@ const GroupSchema = new mongoose.Schema({
     tag: {
       type: String,
       required: true
-    }, */ //touncomment in production
+    },
+    payer: {
+      type: String,
+      required: true
+    },
+    payerName: {
+      type: String,
+      required: true
+    }
   }]
 
 }, {timestamps: false})
 
 const UsersSchema = new mongoose.Schema({
+    name: {
+      type: String,
+      required: true
+    },
     uid: {
       type: String,
       required: true

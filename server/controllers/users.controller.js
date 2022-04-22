@@ -1,14 +1,8 @@
 const users = require("../models/users");
 const groupsModel = require("../models/groups");
 async function createUser(req, res) {
-  let uid = req.body.uid;
-  /* alreadyRegistered = await users.findUser(uid);
-    if(alreadyRegistered) {
-        res.send('Already Registered');
-        return;
-    } */
   try {
-    const user = await users.createUser(req.body.uid);
+    const user = await users.createUser(req.body.uid, req.body.name);
     res.send(user);
   } catch (err) {
     console.log(err);

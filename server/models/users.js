@@ -1,9 +1,9 @@
 const {Users} = require('./index')
 
 
-async function createUser(uid){
+async function createUser(uid, name){
   try{
-    const newUser = new Users({uid: uid, groups: []});
+    const newUser = new Users({uid: uid, name: name, groups: []});
     console.log(newUser);
     await newUser.save();
     return newUser

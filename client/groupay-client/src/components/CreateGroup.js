@@ -23,7 +23,7 @@ export default function CreateGroup() {
       );
       console.log(newGroup);
       setValue();
-      navigate(`/group/${value}`)
+      navigate(`/group/${value}`, { state: { group: newGroup.data } })
     } catch (error) {
       console.log(error);
     }}

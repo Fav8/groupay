@@ -21,16 +21,7 @@ export default function Dashboard() {
   }
 
   async function handleGroupClick(group) {
-    try {
-      const expenses = await apiServices.getExpenses(
-        token,
-        currentUser.uid,
-        group._id,
-      );
-      console.log(expenses);
-    } catch (error) {
-      console.log(error);
-    }
+    navigate(`/group/${group.groupName}`, { state: { group: group } })
   }
 
   useEffect(() => { //refactor to use async await

@@ -6,6 +6,7 @@ import apiServices from '../services/apiService'
 
 export default function Signup() {
     const emailRef = useRef();
+    const nameRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
     const {signup, token} = useAuth()
@@ -22,7 +23,7 @@ export default function Signup() {
             const user = await signup(emailRef.current.value, passwordRef.current.value)
             console.log(token, 'token');
             console.log(user, 'user');
-            await apiServices.register(token, user.user.uid)
+            await apiServices.register(token, user.user.uid, nameRef.current.value)
             navigate('/')
             }
         catch(err){
@@ -40,6 +41,10 @@ export default function Signup() {
                     <Form.Group id='email'>
                         <Form.Label>Email</Form.Label>
                         <Form.Control type='email' required ref={emailRef}></Form.Control>
+                    </Form.Group>
+                    <Form.Group id='name'>
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control type='text' required ref={nameRef}></Form.Control>
                     </Form.Group>
                     <Form.Group id='password'>
                         <Form.Label>password</Form.Label>

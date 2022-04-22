@@ -1,32 +1,37 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import apiServices from "../services/apiService";
 import { useAuth } from "../context/AuthContext";
 import { Form, Button, Card } from "react-bootstrap";
+import CreateExpense from "./CreateExpense";
 
 export default function GroupPage() {
+  const [expenses, setExpenses] = useState([])
   const { currentUser, token } = useAuth();
-
+  const {state} = useLocation();
+  const group = state.group;
   const params = useParams();
-  async function createExpense() {
+
+   useEffect(() => {
     try {
-      const newExpense = await apiServices.createNewExpense(
+      apiServices.getExpenses(
         token,
         currentUser.uid,
-        "6260fcdf2da53fb006939444",
-        "testExpense"
-      );
-      console.log(newExpense);
-    } catch (error) {
+        group._id,
+      ).then(newExpenses => {
+        setExpenses(old => [...newExpenses]); 
+      })
+    } catch (error) { 
       console.log(error);
     }
-  }
+  }, [])  
+  
   return (
     <>
-      <div>GroupPage of {params.groupName}</div>
-      <Button className="m-5" onClick={createExpense}>
-        Create Test Expense
-      </Button>
+      <div>Group Page of {params.groupName}</div>
+      {expenses.length > 0 && expenses.map((expense, i) => <h2 key={i}>{expense.title}: € {expense.value} Payed by: {expense.payerName || 'You'}</h2>)}
+      Invite your friends with this passowrd: {group.password}
+      <CreateExpense group={group} setExpenses={setExpenses}></CreateExpense>
     </>
   );
 }

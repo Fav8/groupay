@@ -1,8 +1,8 @@
 import axios from "axios";
 const url = "http://localhost:3001/";
 const apiServices = {
-  register: async function(authId, userId) {
-    const body = { uid: userId };
+  register: async function(authId, userId, userName) {
+    const body = { uid: userId, name: userName };
     const headers = { headers: { Authorization: "Bearer " + authId } };
     const registered = await axios.post(url + "register", body, headers);
     return registered;
@@ -13,8 +13,8 @@ const apiServices = {
     const createdGroup = await axios.post(url + "groups", body, headers);
     return createdGroup;
   },
-  createNewExpense: async function (authId, userId, group, expenseName) { //TOBECHANGED with a full expense
-    const body = { uid: userId, group: group, expense: expenseName };
+  createNewExpense: async function (authId, userId, group, expense) {
+    const body = { uid: userId, group: group, expense: expense };
     const headers = { headers: { Authorization: "Bearer " + authId } };
     const createdExpense = await axios.post(url + "expenses", body, headers);
     return createdExpense;
