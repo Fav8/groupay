@@ -10,7 +10,6 @@ export default function GroupPage() {
   const [total, setTotal] = useState(0);
   const [totals, setTotals] = useState({});
   const [owes, setOwes] = useState([]);
-  const [userstotal, setuserstotal] = useState([]);
   const [groupWithUsers, setgroupWithUsers] = useState({});
   const { currentUser, token } = useAuth();
   const { state } = useLocation();
@@ -79,11 +78,6 @@ export default function GroupPage() {
             othersExpenses += expense.value;
           }
       }
-      let userTotalsArr = [];
-      for (let user in newTotals) {
-        userTotalsArr.push(user !== 'you' ? `${user} has spent €${newTotals[user]} and must receive €${newTotals[user]/ groupWithUsers.users.length * (groupWithUsers.users.length - 1) }`: `you spent €${newTotals[user]}`);
-      }
-      setuserstotal(userTotalsArr);
       setTotals(newTotals);
       setTotal(newTotal);
       splitPayments(newTotals)
@@ -96,8 +90,7 @@ export default function GroupPage() {
       {expenses.length > 0 &&
         expenses.map((expense, i) => (
           <h2 key={i}>
-            {expense.title}: € {expense.value} paid by:{" "}
-            {expense.payerName || "You"}
+            {expense.title}: €{expense.value} paid by:{expense.payerName}
           </h2>
         ))}
       {<p>Total Spent: €{total}</p>}

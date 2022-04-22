@@ -19,13 +19,13 @@ export default function CreateExpense({ group, setExpenses }) {
     if(currentUser){
     apiServices
         .getUser(token, currentUser.uid)
-        .then((user) => {activeUser = user; console.log(activeUser, 'active user');});}
+        .then((user) => activeUser = user);}
   }, [currentUser])
   
   async function createExpense(e) {
     e.preventDefault();
+    console.log(activeUser.name, 'activeUser');
     if (titleRef.current.value.length > 1 && valueRef.current.value > 0) {
-        console.log(typeof Number(valueRef.current.value));
       try {
         const newExpense = {
           title: titleRef.current.value,
@@ -41,8 +41,8 @@ export default function CreateExpense({ group, setExpenses }) {
           group._id, 
           newExpense
         );
+        console.log(newExpense, '<- new expense');
         setExpenses((oldExpenses => [...oldExpenses, newExpense]))
-        console.log(ack); 
       } catch (error) {
         console.log(error);
       }
