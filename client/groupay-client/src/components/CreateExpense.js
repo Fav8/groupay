@@ -6,11 +6,11 @@ import { useAuth } from "../context/AuthContext";
 
 export default function CreateExpense({ group, setExpenses }) {
   const [curr, setCurr] = useState('Currency')
+  const [tag, setTag] = useState('🏷️ Tag')
   const [activeUser, setActiveUser] = useState({})
   const titleRef = useRef();
   const valueRef = useRef();
   const currRef = useRef();
-  const tagRef = useRef();
   ///const imgRef = useRef(); NOT MVP
   const { currentUser, token } = useAuth();
 
@@ -31,8 +31,8 @@ export default function CreateExpense({ group, setExpenses }) {
         const newExpense = {
           title: titleRef.current.value,
           value: Number(valueRef.current.value),
-          curr: 'EUR', //currRef.current.value ||
-          tag: 'bill', //tagRef.current.value ||
+          curr: curr, 
+          tag: tag,
           payer: currentUser.uid,
           payerName: activeUser.name
         }
@@ -85,12 +85,15 @@ export default function CreateExpense({ group, setExpenses }) {
             </Dropdown>
             <Dropdown className="mb-3">
               <Dropdown.Toggle variant="success" id="dropdown-basic">
-                 {currRef.current && currRef.current.value } Tag
+                 {tag}
               </Dropdown.Toggle>
               <Dropdown.Menu ref={currRef}>
-                <Dropdown.Item>Bill</Dropdown.Item>
-                <Dropdown.Item>Dinner</Dropdown.Item>
-                <Dropdown.Item>Fun</Dropdown.Item>
+              <Dropdown.Item onClick={()=>setTag('💵 Bill')} >💵 Bill</Dropdown.Item>
+                <Dropdown.Item onClick={()=>setTag('🏠 House')}>🏠 House</Dropdown.Item>
+                <Dropdown.Item onClick={()=>setTag('⚽ Fun')}>⚽ Fun</Dropdown.Item>
+                <Dropdown.Item onClick={()=>setTag('🍕 Restaurant')}>🍕 Restaurant</Dropdown.Item>
+                <Dropdown.Item onClick={()=>setTag('🥦 Groceries')}>🥦 Groceries</Dropdown.Item>
+                <Dropdown.Item onClick={()=>setTag('🏷️ Other')}>🏷️ Other</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
            

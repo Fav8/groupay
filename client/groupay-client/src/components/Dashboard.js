@@ -74,7 +74,7 @@ export default function Dashboard() {
           </Button>
         </Container>
       </Navbar>
-      <h1 className="text-center m-3">Your Groupay Groups:</h1>
+      {groupButtons ? <h1 className="text-center m-3">Your Groupay Groups:</h1> : <h1 className="text-center m-3">👋 Hey! You don't have any group yet!</h1>}
       <Container className="border mt-4 shadow">
       <Container className="d-flex align-items-center justify-content-around flex-wrap">
       {groupButtons}

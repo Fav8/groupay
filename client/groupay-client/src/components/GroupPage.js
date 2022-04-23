@@ -158,7 +158,7 @@ export default function GroupPage() {
                   className="m-0 d-flex justify-content-between align-items-center"
                 >
                   <div className="p-2">
-                    <h3>{expense.title}</h3>
+                    <h3>{expense.tag[0]} {expense.title}</h3>
                     <p className="mb-0 text-muted">
                       Paid by: {expense.payerName}
                     </p>
@@ -181,7 +181,7 @@ export default function GroupPage() {
           </ListGroup>
         </Container>
       </div>
-      <Container className="d-flex justify-content-center align-items-center border shadow pl-5 pr-0" style={{width: '582px', maxWidth: '100%'}}>  
+      <Container className="d-flex justify-content-center align-items-center border shadow" style={{width: 'max-content', maxWidth: '100%', paddingRight: '0'}}>  
       <h4 className="mb-0" style={{ marginRight: "5px"}}>
         Invite your friends with this Groupin: {group.password} 
       </h4>
