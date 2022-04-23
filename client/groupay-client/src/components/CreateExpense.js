@@ -51,7 +51,7 @@ export default function CreateExpense({ group, setExpenses }) {
   }
 
   return (
-    <div>
+    <div className="shadow">
       <Card>
         <Card.Body>
           <Form onSubmit={createExpense}>

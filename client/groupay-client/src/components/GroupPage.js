@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import apiServices from "../services/apiService";
 import { useAuth } from "../context/AuthContext";
-import { Form, Button, Card, Navbar, Container } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Card,
+  Navbar,
+  Container,
+  ListGroup,
+} from "react-bootstrap";
 import logo from "../img/token_4.png";
 
 import CreateExpense from "./CreateExpense";
@@ -126,20 +133,35 @@ export default function GroupPage() {
             setExpenses={setExpenses}
           ></CreateExpense>
         </Container>
-        <Container className="m-5 border" style={{ Width: "100%" }}>
-        {<p>Total Spent: €{total}</p>}
-          {expenses.length > 0 &&
-            expenses.map((expense, i) => (
-              <h2 key={i}>
-                {expense.title}: €{expense.value} paid by:{expense.payerName}
-              </h2>
-            ))}
+        <Container
+          className="m-5 border p-0 shadow"
+          style={{ Width: "100%", minWidth: "35rem", maxHeight: "550px" , overflow: "scroll s" }}
+        >
+          {
+            <h2 className="text-white bg-dark p-3 mb-0">
+              Total Spent: €{total.toFixed(2)}
+            </h2>
+          }
+          <ListGroup className="shadow-sm">
+            {expenses.length > 0 &&
+              expenses.map((expense, i) => (
+                <ListGroup.Item key={i} className="m-0 d-flex justify-content-between align-items-center">
+                  <div className="p-2">
+                    <h3>{expense.title}</h3>
+                    <p className="mb-0 text-muted">
+                      Paid by: {expense.payerName}
+                    </p>
+                  </div>
+                  <h3  className="border rounded p-3 bg-dark text-white">€{expense.value}</h3>
+                </ListGroup.Item>
+              ))}
+          </ListGroup>
         </Container>
-        <Container className="m-5 border" style={{ maxWidth: "18rem" }}>
+        <Container className="m-5 border shadow" style={{ maxWidth: "18rem" }}>
           {owes.length > 0 && owes.map((owe, i) => <h3 key={i}>{owe}</h3>)}
-          Invite your friends with this Groupin: {group.password}
         </Container>
       </div>
+      <p className="text-center">Invite your friends with this Groupin: {group.password}</p>
     </>
   );
 }
