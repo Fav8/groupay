@@ -35,11 +35,11 @@ export default function Dashboard() {
           <>
             <Card
               className="text-white bg-dark m-5 shadow"
-              style={{ maxWidth: "18rem", width: "100%"}}
+              style={{ maxWidth: "18rem", width: "100%", minWidth: "15rem"}}
             >
               <Card.Header className="d-flex align-items-center">
                 <img className="" src={groupSvg}></img>
-                <p className="mb-0 ml-3" style={{marginLeft: "5px"}}> 3</p>
+                <p className="mb-0 ml-3" style={{marginLeft: "5px"}}>{Math.floor(Math.random() * (5 - 2 + 1) + 2)}</p> {/* //mock data */}
                 </Card.Header>
               <Card.Body>
                 <Card.Title className="mb-3">{group.groupName}</Card.Title>
@@ -75,11 +75,13 @@ export default function Dashboard() {
         </Container>
       </Navbar>
       <h1 className="text-center m-3">Your Groupay Groups:</h1>
-      <Container className="d-flex align-items-center justify-content-around">
+      <Container className="border mt-4 shadow">
+      <Container className="d-flex align-items-center justify-content-around flex-wrap">
       {groupButtons}
       </Container>
-      <Container className="d-flex align-items-center justify-content-around">
-        <CreateGroup></CreateGroup>
+      </Container>
+      <Container className="d-flex align-items-center justify-content-around mt-4 mb-3">
+        <CreateGroup ></CreateGroup>
         <JoinGroup></JoinGroup>
       </Container>
     </div>

@@ -31,7 +31,7 @@ export default function CreateGroup() {
 
   return (
     <div>
-      <Card>
+      <Card className='shadow'>
         <Card.Body>
           <Form onSubmit={createGroup}>
             <Form.Group className="mb-3" controlId="formGroupName">

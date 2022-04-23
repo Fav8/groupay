@@ -31,14 +31,14 @@ export default function CreateGroup() {
 
   return (
     <div>
-      <Card>
+      <Card className='shadow'>
         <Card.Body>
           <Form onSubmit={joinGroup}>
             <Form.Group className="mb-3" controlId="formGroupName">
               <Form.Label>Join group</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter group name"
+                placeholder="Enter Groupin"
                 onChange={onInput}
                 value={value}
               />

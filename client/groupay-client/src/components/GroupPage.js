@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import apiServices from "../services/apiService";
 import { useAuth } from "../context/AuthContext";
 import { Form, Button, Card, Navbar, Container } from "react-bootstrap";
+import logo from "../img/token_4.png"
+
 import CreateExpense from "./CreateExpense";
 
 export default function GroupPage() {
@@ -11,11 +13,19 @@ export default function GroupPage() {
   const [totals, setTotals] = useState({});
   const [owes, setOwes] = useState([]);
   const [groupWithUsers, setgroupWithUsers] = useState({});
-  const { currentUser, token } = useAuth();
+  const { currentUser, token,logout } = useAuth();
   const { state } = useLocation();
+  const navigate = useNavigate();
   const group = state.group;
   const params = useParams();
-
+  async function handleLogOut() {
+    try {
+      await logout();
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  }
   function splitPayments(payments) {
     const people = Object.keys(payments);
     const valuesPaid = Object.values(payments);
@@ -86,8 +96,24 @@ export default function GroupPage() {
 
   return (
     <>
-  
-      <div>Group Page of {params.groupName}</div>
+      <Navbar bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand href="/">
+            <img
+              alt="Yo"
+              src={logo}
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{" "}
+            Groupay
+          </Navbar.Brand>
+          <h1 className="text-white">{params.groupName}</h1>
+          <Button className="m-3" onClick={handleLogOut}>
+            Log Out
+          </Button>
+        </Container>
+      </Navbar>
       {expenses.length > 0 &&
         expenses.map((expense, i) => (
           <h2 key={i}>
