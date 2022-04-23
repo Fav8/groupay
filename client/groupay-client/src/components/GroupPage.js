@@ -3,7 +3,7 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import apiServices from "../services/apiService";
 import { useAuth } from "../context/AuthContext";
 import { Form, Button, Card, Navbar, Container } from "react-bootstrap";
-import logo from "../img/token_4.png"
+import logo from "../img/token_4.png";
 
 import CreateExpense from "./CreateExpense";
 
@@ -13,7 +13,7 @@ export default function GroupPage() {
   const [totals, setTotals] = useState({});
   const [owes, setOwes] = useState([]);
   const [groupWithUsers, setgroupWithUsers] = useState({});
-  const { currentUser, token,logout } = useAuth();
+  const { currentUser, token, logout } = useAuth();
   const { state } = useLocation();
   const navigate = useNavigate();
   const group = state.group;
@@ -29,38 +29,43 @@ export default function GroupPage() {
   function splitPayments(payments) {
     const people = Object.keys(payments);
     const valuesPaid = Object.values(payments);
-  
+
     const sum = valuesPaid.reduce((acc, curr) => curr + acc);
     const mean = sum / people.length;
-  
-    const sortedPeople = people.sort((personA, personB) => payments[personA] - payments[personB]);
-    const sortedValuesPaid = sortedPeople.map((person) => payments[person] - mean);
-  
+
+    const sortedPeople = people.sort(
+      (personA, personB) => payments[personA] - payments[personB]
+    );
+    const sortedValuesPaid = sortedPeople.map(
+      (person) => payments[person] - mean
+    );
+
     let i = 0;
     let j = sortedPeople.length - 1;
     let debt;
-    let owesArr = []
+    let owesArr = [];
     while (i < j) {
-      debt = Math.min(-(sortedValuesPaid[i]), sortedValuesPaid[j]);
+      debt = Math.min(-sortedValuesPaid[i], sortedValuesPaid[j]);
       sortedValuesPaid[i] += debt;
       sortedValuesPaid[j] -= debt;
-      
-      owesArr.push(`${sortedPeople[i]} owes ${sortedPeople[j]} €${debt.toFixed(2)}`);
-  
+
+      owesArr.push(
+        `${sortedPeople[i]} owes ${sortedPeople[j]} €${debt.toFixed(2)}`
+      );
+
       if (sortedValuesPaid[i] === 0) {
         i++;
       }
-  
+
       if (sortedValuesPaid[j] === 0) {
         j--;
       }
     }
-    setOwes(owesArr)
+    setOwes(owesArr);
   }
-  
+
   useEffect(() => {
     try {
-      
       apiServices
         .getExpenses(token, currentUser.uid, group._id)
         .then((newExpenses) => {
@@ -81,22 +86,22 @@ export default function GroupPage() {
       let newTotals = {};
       for (let expense of expenses) {
         newTotal += expense.value;
-          if (newTotals[expense.payerName])
-            newTotals[expense.payerName] += expense.value;
-          else newTotals[expense.payerName] = expense.value;
-          if (expense.payer !== currentUser.uid) {
-            othersExpenses += expense.value;
-          }
+        if (newTotals[expense.payerName])
+          newTotals[expense.payerName] += expense.value;
+        else newTotals[expense.payerName] = expense.value;
+        if (expense.payer !== currentUser.uid) {
+          othersExpenses += expense.value;
+        }
       }
       setTotals(newTotals);
       setTotal(newTotal);
-      splitPayments(newTotals)
+      splitPayments(newTotals);
     }
   }, [expenses, groupWithUsers]);
 
   return (
     <>
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" className="mb-3">
         <Container>
           <Navbar.Brand href="/">
             <img
@@ -114,17 +119,27 @@ export default function GroupPage() {
           </Button>
         </Container>
       </Navbar>
-      {expenses.length > 0 &&
-        expenses.map((expense, i) => (
-          <h2 key={i}>
-            {expense.title}: €{expense.value} paid by:{expense.payerName}
-          </h2>
-        ))}
-      {<p>Total Spent: €{total}</p>}
-      {owes.length > 0 &&
-        owes.map((owe, i) => <h3 key={i}>{owe}</h3>)}
-      Invite your friends with this Groupin: {group.password}
-      <CreateExpense group={group} setExpenses={setExpenses}></CreateExpense>
+      <div className="d-flex">
+        <Container className="m-5" style={{ maxWidth: "18rem" }}>
+          <CreateExpense
+            group={group}
+            setExpenses={setExpenses}
+          ></CreateExpense>
+        </Container>
+        <Container className="m-5 border" style={{ Width: "100%" }}>
+        {<p>Total Spent: €{total}</p>}
+          {expenses.length > 0 &&
+            expenses.map((expense, i) => (
+              <h2 key={i}>
+                {expense.title}: €{expense.value} paid by:{expense.payerName}
+              </h2>
+            ))}
+        </Container>
+        <Container className="m-5 border" style={{ maxWidth: "18rem" }}>
+          {owes.length > 0 && owes.map((owe, i) => <h3 key={i}>{owe}</h3>)}
+          Invite your friends with this Groupin: {group.password}
+        </Container>
+      </div>
     </>
   );
 }
