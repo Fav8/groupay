@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import apiServices from "../services/apiService";
 import { useAuth } from "../context/AuthContext";
-import { Form, Button, Card } from "react-bootstrap";
+import { Form, Button, Card, Navbar, Container } from "react-bootstrap";
 import CreateExpense from "./CreateExpense";
 
 export default function GroupPage() {
@@ -86,6 +86,7 @@ export default function GroupPage() {
 
   return (
     <>
+  
       <div>Group Page of {params.groupName}</div>
       {expenses.length > 0 &&
         expenses.map((expense, i) => (
