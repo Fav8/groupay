@@ -181,8 +181,8 @@ export default function GroupPage() {
           </ListGroup>
         </Container>
       </div>
-      <Container className="d-flex justify-content-center align-items-center border shadow">  
-      <h4 className="mb-0" style={{ marginRight: "5px", maxWidth: '30rem'}}>
+      <Container className="d-flex justify-content-center align-items-center border shadow pl-5 pr-0" style={{width: '582px', maxWidth: '100%'}}>  
+      <h4 className="mb-0" style={{ marginRight: "5px"}}>
         Invite your friends with this Groupin: {group.password} 
       </h4>
       <Button onClick={copyToClipBoard}>Copy</Button>
