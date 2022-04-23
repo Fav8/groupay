@@ -88,12 +88,12 @@ export default function CreateExpense({ group, setExpenses }) {
                  {tag}
               </Dropdown.Toggle>
               <Dropdown.Menu ref={currRef}>
-              <Dropdown.Item onClick={()=>setTag('💵 Bill')} >💵 Bill</Dropdown.Item>
-                <Dropdown.Item onClick={()=>setTag('🏠 House')}>🏠 House</Dropdown.Item>
-                <Dropdown.Item onClick={()=>setTag('⚽ Fun')}>⚽ Fun</Dropdown.Item>
-                <Dropdown.Item onClick={()=>setTag('🍕 Restaurant')}>🍕 Restaurant</Dropdown.Item>
-                <Dropdown.Item onClick={()=>setTag('🥦 Groceries')}>🥦 Groceries</Dropdown.Item>
-                <Dropdown.Item onClick={()=>setTag('🏷️ Other')}>🏷️ Other</Dropdown.Item>
+              <Dropdown.Item onClick={()=>setTag('💵')} >💵 Bill</Dropdown.Item>
+                <Dropdown.Item onClick={()=>setTag('🏠')}>🏠 House</Dropdown.Item>
+                <Dropdown.Item onClick={()=>setTag('⚽')}>⚽ Fun</Dropdown.Item>
+                <Dropdown.Item onClick={()=>setTag('🍕')}>🍕 Restaurant</Dropdown.Item>
+                <Dropdown.Item onClick={()=>setTag('🥦')}>🥦 Groceries</Dropdown.Item>
+                <Dropdown.Item onClick={()=>setTag('🏷️')}>🏷️ Other</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
            

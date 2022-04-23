@@ -158,7 +158,7 @@ export default function GroupPage() {
                   className="m-0 d-flex justify-content-between align-items-center"
                 >
                   <div className="p-2">
-                    <h3>{expense.tag[0]} {expense.title}</h3>
+                    <h3>{expense.tag} {expense.title}</h3>
                     <p className="mb-0 text-muted">
                       Paid by: {expense.payerName}
                     </p>
