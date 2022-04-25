@@ -24,11 +24,11 @@ async function createExpense(id, expense){
 );
 }
 
-async function deleteExpense(id, expense){
+async function deleteExpense(id){
+  console.log('deleting');
   return await Groups.updateOne(
     { _id: id }, 
-    { $pull: { expenses: expense } },
-    done
+    { expenses: [] }
 );
   }
 

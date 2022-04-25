@@ -5,10 +5,13 @@ import 'package:groupay_mobile/authentication_service.dart';
 import 'package:provider/provider.dart';
 import 'package:groupay_mobile/Homepage.dart';
 import 'package:groupay_mobile/Login.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
@@ -25,6 +28,7 @@ class MyApp extends StatelessWidget {
             initialData: null)
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -41,9 +45,9 @@ class AuthenticationWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final firebaseUser = context.watch<User>();
+    final firebaseUser = context.watch<User?>();
     if (firebaseUser != null) {
-      return HomePage();
+      return HomePage(firebaseUser);
     }
     return Login();
   }

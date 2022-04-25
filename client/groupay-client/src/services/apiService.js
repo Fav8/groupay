@@ -19,6 +19,11 @@ const apiServices = {
     const createdExpense = await axios.post(url + "expenses", body, headers);
     return createdExpense;
   },
+  cancelExpenses: async function (authId, userId, group) {
+    console.log(authId);
+    const cancelled = await axios.delete(url + "expenses", { headers: { Authorization: "Bearer " + authId }, data: { uid: userId, group: group}  });
+    return cancelled;
+  },
   getGroups: async function (authId, userId,) { 
     const headers = { headers: { Authorization: "Bearer " + authId, uid: userId } };
     const groups = await axios.get(url + "groups", headers);

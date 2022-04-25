@@ -105,9 +105,18 @@ export default function GroupPage() {
       splitPayments(newTotals);
     }
   }, [expenses, groupWithUsers]);
-
-  function copyToClipBoard(){
-    navigator.clipboard.writeText(group.password)
+  async function clearExpenses(e) {
+    e.preventDefault();
+    try {
+      let cancelled = await apiServices.cancelExpenses(
+        token,
+        currentUser.uid,
+        group._id);
+      setExpenses([]);
+    } catch (e) {}
+  }
+  function copyToClipBoard() {
+    navigator.clipboard.writeText(group.password);
   }
   return (
     <>
@@ -135,6 +144,16 @@ export default function GroupPage() {
             group={group}
             setExpenses={setExpenses}
           ></CreateExpense>
+          <div className="mt-3 text-center">
+            <Button
+              variant="dark"
+              className="shadow"
+              style={{ fontSize: "25px" }}
+              onClick={clearExpenses}
+            >
+              ✔️ All paid?
+            </Button>
+          </div>
         </Container>
         <Container
           className="m-5 border p-0 shadow"
@@ -158,7 +177,9 @@ export default function GroupPage() {
                   className="m-0 d-flex justify-content-between align-items-center"
                 >
                   <div className="p-2">
-                    <h3>{expense.tag} {expense.title}</h3>
+                    <h3>
+                      {expense.tag} {expense.title}
+                    </h3>
                     <p className="mb-0 text-muted">
                       Paid by: {expense.payerName}
                     </p>
@@ -170,22 +191,30 @@ export default function GroupPage() {
               ))}
           </ListGroup>
         </Container>
-        <Container className="m-5 border shadow p-0" style={{ maxWidth: "18rem" }}>
+        <Container
+          className="m-5 border shadow p-0"
+          style={{ maxWidth: "18rem" }}
+        >
           <ListGroup className="shadow-sm">
             {owes.length > 0 &&
               owes.map((owe, i) => (
                 <ListGroup.Item key={i}>
-                  <h3 className="m-0" key={i}>{owe}</h3>
+                  <h3 className="m-0" key={i}>
+                    {owe}
+                  </h3>
                 </ListGroup.Item>
               ))}
           </ListGroup>
         </Container>
       </div>
-      <Container className="d-flex justify-content-center align-items-center border shadow" style={{width: 'max-content', maxWidth: '100%', paddingRight: '0'}}>  
-      <h4 className="mb-0" style={{ marginRight: "5px"}}>
-        Invite your friends with this Groupin: {group.password} 
-      </h4>
-      <Button onClick={copyToClipBoard}>Copy</Button>
+      <Container
+        className="d-flex justify-content-center align-items-center border shadow"
+        style={{ width: "max-content", maxWidth: "100%", paddingRight: "0" }}
+      >
+        <h4 className="mb-0" style={{ marginRight: "5px" }}>
+          Invite your friends with this Groupin: {group.password}
+        </h4>
+        <Button onClick={copyToClipBoard}>Copy</Button>
       </Container>
     </>
   );

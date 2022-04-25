@@ -28,7 +28,8 @@ async function createExpense(req, res) {
 }
 async function deleteExpense(req, res) {
   try {
-    const expense = await groups.deleteExpense(req.body);
+    console.log(req.body.group);
+    const expense = await groups.deleteExpense(req.body.group);
     res.send(expense);
   } catch (err) {
     console.log(err);
