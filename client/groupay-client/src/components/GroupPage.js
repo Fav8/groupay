@@ -126,11 +126,10 @@ export default function GroupPage() {
             <img
               alt="Yo"
               src={logo}
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />{" "}
-            Groupay
+              width="100"
+              height="40"
+              className="d-inline-block align-center"
+            />
           </Navbar.Brand>
           <h1 className="text-white">{params.groupName}</h1>
           <Button className="m-3" onClick={handleLogOut}>

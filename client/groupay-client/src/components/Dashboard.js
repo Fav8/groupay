@@ -60,14 +60,13 @@ export default function Dashboard() {
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="/">
-            <img
+          <img
               alt="Yo"
               src={logo}
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />{" "}
-            Groupay
+              width="100"
+              height="40"
+              className="d-inline-block align-center"
+            />
           </Navbar.Brand>
           <Button className="m-3" onClick={handleLogOut}>
             Log Out
