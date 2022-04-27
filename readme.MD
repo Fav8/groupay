@@ -14,7 +14,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Fav8/groupay">
-    <img src="client/groupay-client/src/img/token_4.png" alt="Logo" width="80" height="80">
+    <img src="client/groupay-client/src/img/token_4.png" alt="Logo" width="160" height="80">
   </a>
 
 <h3 align="center">GrouPay</h3>
