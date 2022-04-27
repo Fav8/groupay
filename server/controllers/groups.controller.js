@@ -4,6 +4,7 @@ const ADLER32 = require("adler-32");
 
 async function createExpense(req, res) {
   try {
+    console.log(req.body, '<-BODY');
     const user = await users.findUser(req.body.uid);
     for (let userGroup of user.groups) {
       if (userGroup._id === req.body.group) {
