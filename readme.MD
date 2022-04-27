@@ -20,7 +20,7 @@
 <h3 align="center">GrouPay</h3>
 
   <p align="center">
-    project_description
+    A full stack tool to manage shared expenses 
     <br />
     <a href="https://github.com/Fav8/groupay"><strong>Explore the docs »</strong></a>
     <br />
