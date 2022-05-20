@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Fav8/groupay">
-    <img src="client/groupay-client/src/img/token_4.png" alt="Logo" width="160" height="80">
+    <img src="client/groupay-client/src/img/token_4.png" alt="Logo">
   </a>
 
 <h3 align="center">GrouPay</h3>
@@ -44,10 +44,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-<a href="https://github.com/Fav8/groupay">
-    <img src="client/groupay-client/src/img/groupay_screen2.png" width="160" height="80">
-  </a>
-    
+    <img src="client/groupay-client/src/img/groupayscreen.png">
 
 GrouPay was built during Codework's bootcamp as the solo project.
 While coding it, Notion was my tool of chioce to manage tasks and note bugs or quick fixes I needed to do.
