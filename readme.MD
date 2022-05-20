@@ -50,6 +50,8 @@ While coding it, Notion was my tool of chioce to manage tasks and note bugs or q
 Working on the back end first was the right move, because even tough I was constatly fiddling with it building the front end because I noticed I needed different data from what I planned, it was a very easy process having my fundamentals down.
 Having a ready to use back also helped with coding the mobile version in 1 day without prior experience of React Native.
 
+[Check out the mobile version here](https://github.com/Fav8/groupay_app)
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
