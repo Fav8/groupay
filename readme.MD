@@ -72,7 +72,7 @@ Having a ready to use back also helped with coding the mobile version in 1 day w
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <a href="https://github.com/Fav8/groupay">
-    <img src="client/groupay-client/src/img/groupay_screen1.png">
+    <img src="client/groupay-client/src/img/groupay_screen.png">
   </a>
 
 <!-- GETTING STARTED -->
