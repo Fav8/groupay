@@ -44,6 +44,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+    <img src="client/groupay-client/src/img/groupayscreen.png">
 
 GrouPay was built during Codework's bootcamp as the solo project.
 While coding it, Notion was my tool of chioce to manage tasks and note bugs or quick fixes I needed to do.
