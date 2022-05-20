@@ -1,3 +1,4 @@
+//controller to manage user's behaviour
 const users = require("../models/users");
 const groupsModel = require("../models/groups");
 async function createUser(req, res) {
